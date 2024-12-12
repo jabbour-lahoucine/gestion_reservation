@@ -11,9 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class Chambre implements Serializable {
+public class Chambre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,5 +23,55 @@ public class Chambre implements Serializable {
     @OneToMany(mappedBy = "chambre", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations;
 
-    // Getters and Setters
+    public Chambre(String type, Double prix, Boolean disponible) {
+        this.type = type;
+        this.prix = prix;
+        this.disponible = disponible;
+    }
+
+    public Chambre() {
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(Double prix) {
+        this.prix = prix;
+    }
+
+    public Boolean getDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(Boolean disponible) {
+        this.disponible = disponible;
+    }
+
+
+
 }

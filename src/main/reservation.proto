@@ -1,0 +1,130 @@
+syntax = "proto3";
+
+package com.example.gestion_reservation;
+
+option java_package = "com.example.gestion_reservation";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+// Client message
+message Client {
+  int64 id = 1;
+  string nom = 2;
+  string prenom = 3;
+  string email = 4;
+  string telephone = 5;
+}
+
+// Chambre message
+message Chambre {
+  int64 id = 1;
+  string type = 2;
+  double prix = 3;
+  bool disponible = 4;
+}
+
+// Reservation message
+message Reservation {
+  int64 id = 1;
+  int64 client_id = 2;
+  int64 chambre_id = 3;
+  string dateDebut = 4;
+  string dateFin = 5;
+  string preferences = 6;
+}
+
+// Request message for CRUD operations
+message CreateClientRequest {
+  string nom = 1;
+  string prenom = 2;
+  string email = 3;
+  string telephone = 4;
+}
+
+message UpdateClientRequest {
+  int64 id = 1;
+  string nom = 2;
+  string prenom = 3;
+  string email = 4;
+  string telephone = 5;
+}
+
+message DeleteClientRequest {
+  int64 id = 1;
+}
+
+message GetClientRequest {
+  int64 id = 1;
+}
+
+// CRUD operations for Client
+service ClientService {
+  rpc CreateClient(CreateClientRequest) returns (Client);
+  rpc UpdateClient(UpdateClientRequest) returns (Client);
+  rpc DeleteClient(DeleteClientRequest) returns (google.protobuf.Empty);
+  rpc GetClient(GetClientRequest) returns (Client);
+}
+
+// Chambre CRUD operations
+message CreateChambreRequest {
+  string type = 1;
+  double prix = 2;
+  bool disponible = 3;
+}
+
+message UpdateChambreRequest {
+  int64 id = 1;
+  string type = 2;
+  double prix = 3;
+  bool disponible = 4;
+}
+
+message DeleteChambreRequest {
+  int64 id = 1;
+}
+
+message GetChambreRequest {
+  int64 id = 1;
+}
+
+service ChambreService {
+  rpc CreateChambre(CreateChambreRequest) returns (Chambre);
+  rpc UpdateChambre(UpdateChambreRequest) returns (Chambre);
+  rpc DeleteChambre(DeleteChambreRequest) returns (google.protobuf.Empty);
+  rpc GetChambre(GetChambreRequest) returns (Chambre);
+}
+
+// Reservation CRUD operations
+message CreateReservationRequest {
+  int64 clientId = 1;
+  int64 chambreId = 2;
+  string dateDebut = 3;
+  string dateFin = 4;
+  string preferences = 5;
+}
+
+message UpdateReservationRequest {
+  int64 id = 1;
+  int64 clientId = 2;
+  int64 chambreId = 3;
+  string dateDebut = 4;
+  string dateFin = 5;
+  string preferences = 6;
+}
+
+message DeleteReservationRequest {
+  int64 id = 1;
+}
+
+message GetReservationRequest {
+  int64 id = 1;
+}
+
+service ReservationService {
+  rpc CreateReservation(CreateReservationRequest) returns (Reservation);
+  rpc UpdateReservation(UpdateReservationRequest) returns (Reservation);
+  rpc DeleteReservation(DeleteReservationRequest) returns (google.protobuf.Empty);
+  rpc GetReservation(GetReservationRequest) returns (Reservation);
+}
