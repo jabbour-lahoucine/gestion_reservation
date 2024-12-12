@@ -3,6 +3,7 @@ package com.example.gestion_reservation.services;
 import com.example.gestion_reservation.entities.Reservation;
 import com.example.gestion_reservation.repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,14 +15,15 @@ public class ReservationService {
     @Autowired
     private ReservationRepository reservationRepository;
 
+    // Méthode pour créer une réservation
     public Reservation createReservation(Reservation reservation) {
         return reservationRepository.save(reservation);
     }
 
+    // Méthode pour mettre à jour une réservation existante
     public Reservation updateReservation(Long id, Reservation reservation) {
         Optional<Reservation> existingReservation = reservationRepository.findById(id);
         if (existingReservation.isPresent()) {
-
             Reservation updatedReservation = existingReservation.get();
             updatedReservation.setClient(reservation.getClient());
             updatedReservation.setChambre(reservation.getChambre());
@@ -29,25 +31,35 @@ public class ReservationService {
             updatedReservation.setDateFin(reservation.getDateFin());
             updatedReservation.setPreferences(reservation.getPreferences());
             return reservationRepository.save(updatedReservation);
+        } else {
+            throw new RuntimeException("Reservation not found with id: " + id);
         }
-        throw new RuntimeException("Reservation not found with id: " + id);
     }
 
-    public Optional<Reservation> findReservationById(Long id) {
-        return reservationRepository.findById(id);
+    // Méthode pour obtenir une réservation par son ID (modifiée pour retourner une Optional)
+    public Optional<Reservation> getReservationById(Long id) {
+        return reservationRepository.findById(id); // Retourne une Optional<Reservation>
     }
 
+    // Méthode pour obtenir une réservation par son ID (ancienne version qui retourne ResponseEntity)
+    public ResponseEntity<Reservation> findReservationById(Long id) {
+        Optional<Reservation> reservation = reservationRepository.findById(id);
+        return reservation.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    // Méthode pour obtenir toutes les réservations
     public List<Reservation> findAllReservations() {
         return reservationRepository.findAll();
     }
 
+    // Méthode pour supprimer une réservation par son ID
     public void deleteReservation(Long id) {
-        reservationRepository.deleteById(id);
+        Optional<Reservation> reservation = reservationRepository.findById(id);
+        if (reservation.isPresent()) {
+            reservationRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Reservation not found with id: " + id);
+        }
     }
-
-
-
-
-
-
 }

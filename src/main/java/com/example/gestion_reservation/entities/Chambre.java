@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -17,13 +18,13 @@ public class Chambre {
     private Long id;
 
     private String type;
-    private Double prix;
+    private BigDecimal prix;
     private Boolean disponible;
 
     @OneToMany(mappedBy = "chambre", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations;
 
-    public Chambre(String type, Double prix, Boolean disponible) {
+    public Chambre(String type, BigDecimal prix, Boolean disponible) {
         this.type = type;
         this.prix = prix;
         this.disponible = disponible;
@@ -56,11 +57,11 @@ public class Chambre {
         this.type = type;
     }
 
-    public Double getPrix() {
+    public BigDecimal getPrix() {
         return prix;
     }
 
-    public void setPrix(Double prix) {
+    public void setPrix(BigDecimal prix) {
         this.prix = prix;
     }
 

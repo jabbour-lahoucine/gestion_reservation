@@ -9,6 +9,7 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -39,12 +40,12 @@ public class ChamberController {
     @MutationMapping
     public Chambre createChambre(
             @Argument String type,
-            @Argument Double prix,
+            @Argument Double prix,  // We will convert this to BigDecimal
             @Argument Boolean disponible
     ) {
         Chambre chambre = new Chambre();
         chambre.setType(type);
-        chambre.setPrix(prix);
+        chambre.setPrix(BigDecimal.valueOf(prix));  // Convert Double to BigDecimal
         chambre.setDisponible(disponible);
         return chambreRepository.save(chambre);
     }
@@ -54,12 +55,12 @@ public class ChamberController {
     public Chambre updateChambre(
             @Argument Long id,
             @Argument String type,
-            @Argument Double prix,
+            @Argument Double prix,  // We will convert this to BigDecimal
             @Argument Boolean disponible
     ) {
         Chambre chambre = chambreRepository.findById(id).orElseThrow(() -> new RuntimeException("Chambre not found"));
         if (type != null) chambre.setType(type);
-        if (prix != null) chambre.setPrix(prix);
+        if (prix != null) chambre.setPrix(BigDecimal.valueOf(prix));  // Convert Double to BigDecimal
         if (disponible != null) chambre.setDisponible(disponible);
         return chambreRepository.save(chambre);
     }

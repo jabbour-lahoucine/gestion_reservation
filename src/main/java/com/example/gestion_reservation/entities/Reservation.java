@@ -5,11 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,25 +24,23 @@ public class Reservation {
     @JoinColumn(name = "chambre_id", nullable = false)
     private Chambre chambre;
 
-    @Temporal(TemporalType.DATE)
-    private Date dateDebut;
+    private LocalDate dateDebut;
 
-    @Temporal(TemporalType.DATE)
-    private Date dateFin;
+    private LocalDate dateFin;
 
-    private String preferences;
+    private String preferences;  // preferences est maintenant un String
 
-    public Reservation(Client client, Chambre chambre, Date dateDebut, Date dateFin, String preferences) {
+    public Reservation(Client client, Chambre chambre, LocalDate dateDebut, LocalDate dateFin, String preferences) {
         this.client = client;
         this.chambre = chambre;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.preferences = preferences;
     }
-
-    public Reservation() {
+    public Reservation(){
     }
 
+    // Getters et Setters
     public Long getId() {
         return id;
     }
@@ -66,19 +65,19 @@ public class Reservation {
         this.chambre = chambre;
     }
 
-    public Date getDateDebut() {
+    public LocalDate getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(Date dateDebut) {
+    public void setDateDebut(LocalDate dateDebut) {
         this.dateDebut = dateDebut;
     }
 
-    public Date getDateFin() {
+    public LocalDate getDateFin() {
         return dateFin;
     }
 
-    public void setDateFin(Date dateFin) {
+    public void setDateFin(LocalDate dateFin) {
         this.dateFin = dateFin;
     }
 
@@ -89,7 +88,4 @@ public class Reservation {
     public void setPreferences(String preferences) {
         this.preferences = preferences;
     }
-
-
 }
-

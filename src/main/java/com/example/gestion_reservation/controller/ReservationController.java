@@ -12,15 +12,18 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
 public class ReservationController {
+
     @Autowired
     private ReservationRepository reservationRepository;
+
     @Autowired
     private ClientRepository clientRepository;
+
     @Autowired
     private ChambreRepository chambreRepository;
 
@@ -50,8 +53,8 @@ public class ReservationController {
         Reservation reservation = new Reservation();
         reservation.setClient(client);
         reservation.setChambre(chambre);
-        reservation.setDateDebut(Date.valueOf(dateDebut));
-        reservation.setDateFin(Date.valueOf(dateFin));
+        reservation.setDateDebut(LocalDate.parse(dateDebut));  // Utilisation de LocalDate
+        reservation.setDateFin(LocalDate.parse(dateFin));      // Utilisation de LocalDate
         reservation.setPreferences(preferences);
 
         return reservationRepository.save(reservation);
@@ -80,14 +83,13 @@ public class ReservationController {
         // Update the reservation fields with the new values
         reservation.setClient(client);
         reservation.setChambre(chambre);
-        reservation.setDateDebut(Date.valueOf(dateDebut));
-        reservation.setDateFin(Date.valueOf(dateFin));
+        reservation.setDateDebut(LocalDate.parse(dateDebut));  // Utilisation de LocalDate
+        reservation.setDateFin(LocalDate.parse(dateFin));      // Utilisation de LocalDate
         reservation.setPreferences(preferences);
 
         // Save the updated reservation to the repository
         return reservationRepository.save(reservation);
     }
-
 
     // Mutation to delete a reservation
     @MutationMapping
