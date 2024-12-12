@@ -3,9 +3,9 @@ package com.example.gestion_reservation.entities;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.util.Date;
+
 
 @Entity
 @Data
@@ -23,13 +23,13 @@ public class Reservation {
     @JoinColumn(name = "chambre_id", nullable = false)
     private Chambre chambre;
 
-    private LocalDate dateDebut;
+    private Date dateDebut;
 
-    private LocalDate dateFin;
+    private Date dateFin;
 
     private String preferences;  // preferences est maintenant un String
 
-    public Reservation(Client client, Chambre chambre, LocalDate dateDebut, LocalDate dateFin, String preferences) {
+    public Reservation(Client client, Chambre chambre, Date dateDebut, Date dateFin, String preferences) {
         this.client = client;
         this.chambre = chambre;
         this.dateDebut = dateDebut;
@@ -64,19 +64,19 @@ public class Reservation {
         this.chambre = chambre;
     }
 
-    public LocalDate getDateDebut() {
+    public Date getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(LocalDate dateDebut) {
+    public void setDateDebut(Date dateDebut) {
         this.dateDebut = dateDebut;
     }
 
-    public LocalDate getDateFin() {
+    public Date getDateFin() {
         return dateFin;
     }
 
-    public void setDateFin(LocalDate dateFin) {
+    public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
     }
 

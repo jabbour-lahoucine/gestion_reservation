@@ -6,14 +6,15 @@ import com.example.gestion_reservation.entities.Client;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDate;
+import java.util.Date;
 
 @XmlRootElement
 public class ReservationResponse {
     private Long reservationId;
     private Client client;
     private Chambre chambre;
-    private LocalDate dateDebut;
-    private LocalDate dateFin;
+    private Date dateDebut;
+    private Date dateFin;
     private String preferences;  // Changement ici : passer de Map<String, String> à String
 
     @XmlElement
@@ -44,20 +45,20 @@ public class ReservationResponse {
     }
 
     @XmlElement
-    public LocalDate getDateDebut() {
+    public Date getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(LocalDate dateDebut) {
+    public void setDateDebut(Date dateDebut) {
         this.dateDebut = dateDebut;
     }
 
     @XmlElement
-    public LocalDate getDateFin() {
+    public Date getDateFin() {
         return dateFin;
     }
 
-    public void setDateFin(LocalDate dateFin) {
+    public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
     }
 

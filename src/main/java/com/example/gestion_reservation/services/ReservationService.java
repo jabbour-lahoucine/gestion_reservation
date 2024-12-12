@@ -3,7 +3,6 @@ package com.example.gestion_reservation.services;
 import com.example.gestion_reservation.entities.Reservation;
 import com.example.gestion_reservation.repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,10 +41,9 @@ public class ReservationService {
     }
 
     // Méthode pour obtenir une réservation par son ID (ancienne version qui retourne ResponseEntity)
-    public ResponseEntity<Reservation> findReservationById(Long id) {
+    public Reservation findReservationById(Long id) {
         Optional<Reservation> reservation = reservationRepository.findById(id);
-        return reservation.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return reservation.orElse(null);
     }
 
     // Méthode pour obtenir toutes les réservations

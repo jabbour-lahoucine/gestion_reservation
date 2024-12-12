@@ -12,7 +12,7 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -42,7 +42,7 @@ public class ReservationController {
     // Mutation to create a new reservation
     @MutationMapping
     public Reservation createReservation(@Argument Long clientId, @Argument Long chambreId,
-                                         @Argument String dateDebut, @Argument String dateFin,
+                                         @Argument Date dateDebut, @Argument Date dateFin,
                                          @Argument String preferences) {
         Client client = clientRepository.findById(clientId)
                 .orElseThrow(() -> new RuntimeException("Client not found"));
@@ -53,8 +53,8 @@ public class ReservationController {
         Reservation reservation = new Reservation();
         reservation.setClient(client);
         reservation.setChambre(chambre);
-        reservation.setDateDebut(LocalDate.parse(dateDebut));  // Utilisation de LocalDate
-        reservation.setDateFin(LocalDate.parse(dateFin));      // Utilisation de LocalDate
+        reservation.setDateDebut(dateDebut);  // Utilisation de LocalDate
+        reservation.setDateFin(dateFin);      // Utilisation de LocalDate
         reservation.setPreferences(preferences);
 
         return reservationRepository.save(reservation);
@@ -65,8 +65,8 @@ public class ReservationController {
     public Reservation updateReservation(@Argument Long id,
                                          @Argument Long clientId,
                                          @Argument Long chambreId,
-                                         @Argument String dateDebut,
-                                         @Argument String dateFin,
+                                         @Argument Date dateDebut,
+                                         @Argument Date dateFin,
                                          @Argument String preferences) {
         // Retrieve the existing reservation from the database
         Reservation reservation = reservationRepository.findById(id)
@@ -83,8 +83,8 @@ public class ReservationController {
         // Update the reservation fields with the new values
         reservation.setClient(client);
         reservation.setChambre(chambre);
-        reservation.setDateDebut(LocalDate.parse(dateDebut));  // Utilisation de LocalDate
-        reservation.setDateFin(LocalDate.parse(dateFin));      // Utilisation de LocalDate
+        reservation.setDateDebut(dateDebut);  // Utilisation de LocalDate
+        reservation.setDateFin(dateFin);      // Utilisation de LocalDate
         reservation.setPreferences(preferences);
 
         // Save the updated reservation to the repository
