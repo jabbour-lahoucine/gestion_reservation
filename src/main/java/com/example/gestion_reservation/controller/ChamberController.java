@@ -45,7 +45,7 @@ public class ChamberController {
     ) {
         Chambre chambre = new Chambre();
         chambre.setType(type);
-        chambre.setPrix(BigDecimal.valueOf(prix));  // Convert Double to BigDecimal
+        chambre.setPrix(prix);  // Convert Double to BigDecimal
         chambre.setDisponible(disponible);
         return chambreRepository.save(chambre);
     }
@@ -60,7 +60,7 @@ public class ChamberController {
     ) {
         Chambre chambre = chambreRepository.findById(id).orElseThrow(() -> new RuntimeException("Chambre not found"));
         if (type != null) chambre.setType(type);
-        if (prix != null) chambre.setPrix(BigDecimal.valueOf(prix));  // Convert Double to BigDecimal
+        if (prix != null) chambre.setPrix(prix);
         if (disponible != null) chambre.setDisponible(disponible);
         return chambreRepository.save(chambre);
     }

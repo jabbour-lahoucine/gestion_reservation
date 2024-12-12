@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 public class ChambreResponse {
     private Long chambreId;
     private String type;
-    private BigDecimal prix;
+    private double prix;
     private boolean disponible;
 
     // Getter and Setter for chambreId
@@ -33,11 +33,11 @@ public class ChambreResponse {
 
     // Getter and Setter for prix
     @XmlElement
-    public BigDecimal getPrix() {
+    public double getPrix() {
         return prix;
     }
 
-    public void setPrix(BigDecimal prix) {
+    public void setPrix(double prix) {
         this.prix = prix;
     }
 

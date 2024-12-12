@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public class ChambreRequest {
     private Long chambreId;
     private String type;
-    private BigDecimal prix;
+    private double prix;
     private boolean disponible;
 
 
@@ -34,11 +34,11 @@ public class ChambreRequest {
     }
 
     @XmlElement
-    public @NotNull(message = "Le prix est obligé") @Positive(message = "Il faut que le prix soit positif") BigDecimal getPrix() {
+    public @NotNull(message = "Le prix est obligé") @Positive(message = "Il faut que le prix soit positif") double getPrix() {
         return prix;
     }
 
-    public void setPrix(BigDecimal prix) {
+    public void setPrix(double prix) {
         this.prix = prix;
     }
 
