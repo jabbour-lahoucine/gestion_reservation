@@ -1,29 +1,11 @@
-package com.example.gestion_reservation.SOAP.entities;
+package com.example.gestion_reservation.dto;
 
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
-public class ClientRequest {
-    private Long clientId;
+public class ClienRequest {
     private String nom;
     private String prenom;
     private String email;
     private String telephone;
 
-    // Getter and Setter for clientId
-    @XmlElement
-    public Long getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
-    }
-
-    // Getter and Setter for nom
-    @XmlElement
     public String getNom() {
         return nom;
     }
@@ -32,8 +14,6 @@ public class ClientRequest {
         this.nom = nom;
     }
 
-    // Getter and Setter for prenom
-    @XmlElement
     public String getPrenom() {
         return prenom;
     }
@@ -42,8 +22,6 @@ public class ClientRequest {
         this.prenom = prenom;
     }
 
-    // Getter and Setter for email
-    @XmlElement
     public String getEmail() {
         return email;
     }
@@ -52,8 +30,6 @@ public class ClientRequest {
         this.email = email;
     }
 
-    // Getter and Setter for telephone
-    @XmlElement
     public String getTelephone() {
         return telephone;
     }

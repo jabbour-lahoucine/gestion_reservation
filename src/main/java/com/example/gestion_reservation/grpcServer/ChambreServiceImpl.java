@@ -5,10 +5,12 @@ import com.example.gestion_reservation.services.ChambreService;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @GrpcService
+@Service
 public class ChambreServiceImpl extends ChambreServiceGrpc.ChambreServiceImplBase {
 
     @Autowired

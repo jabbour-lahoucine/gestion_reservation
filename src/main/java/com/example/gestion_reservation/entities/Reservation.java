@@ -4,22 +4,30 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.Date;
 
 
 @Entity
 @Data
 @AllArgsConstructor
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
+    @XmlTransient
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
     @ManyToOne
+    @XmlTransient
     @JoinColumn(name = "chambre_id", nullable = false)
     private Chambre chambre;
 

@@ -10,11 +10,13 @@ import com.example.gestion_reservation.services.ReservationService;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Optional;
 
 @GrpcService
+@Service
 public class ReservationServiceImpl extends ReservationServiceGrpc.ReservationServiceImplBase {
 
     @Autowired

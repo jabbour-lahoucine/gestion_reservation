@@ -6,12 +6,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 
 import java.util.List;
 
 @Entity
 @Data
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Chambre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +28,7 @@ public class Chambre {
     private Boolean disponible;
 
     @OneToMany(mappedBy = "chambre", cascade = CascadeType.ALL, orphanRemoval = true)
+    @XmlTransient
     private List<Reservation> reservations;
 
     public Chambre(String type, double prix, Boolean disponible) {
